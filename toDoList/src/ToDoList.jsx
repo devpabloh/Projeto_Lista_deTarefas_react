@@ -8,7 +8,14 @@ function ToDoList(){
     const [novoItem, setNovoItem] = useState("");
 
     function adicionaItem(form){
-        form.pre
+        form.preventDefault();
+        if(!novoItem){
+            return;
+        }
+        setLista([...Lista, {text: novoItem, isCompleted: false}]);
+        setNovoItem("");
+        document.getElementById('input-entrada').focus();
+
     }
     
     return (
@@ -16,10 +23,13 @@ function ToDoList(){
         <div>
             <h1>Lista de tarefas!</h1>
             <form onSubmit={adicionaItem}>
-                <input type="text" value={novoItem} onChange={(e)=>{setNovoItem(e.target.value)}} placeholder="Adicione uma tarefa..." />
+                <input id="input-entrada" type="text" value={novoItem} onChange={(e)=>{setNovoItem(e.target.value)}} placeholder="Adicione uma tarefa..." />
                 <button className="add" type="submit">Adicionar</button>
             </form>
             <div className="listaTarefas">
+                {
+                    Lista.length < 1 ?
+                }
                 <div className="item">
                     <span>Tarefa de exemplo</span>
                     <button className="del">Deletar</button>
